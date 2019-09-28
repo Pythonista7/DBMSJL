@@ -19,6 +19,6 @@ from .views import register_applicant
 
 #app_name="products"
 urlpatterns = [
-    path("signUpApplicant",register_applicant),
+    path("signUpApplicant/",register_applicant),
    
 ]

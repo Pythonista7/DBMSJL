@@ -4,13 +4,12 @@ from .forms import ApplicantRegistrationForm
 
 # Create your views here.
 
-def register_applicant(request):
+def register_applicant(request,*args,**kwargs):
     form=ApplicantRegistrationForm(request.POST or None)
     if form.is_valid():
         form.save()
-        mail_id=form.cleaned_data['email_id']
         #return redirect('/')
     else:
         form=ApplicantRegistrationForm()
-    
-    return render(request,'applicant/signUpApplicant.html',context={"form":form})
+    context={"form":form}
+    return render(request,'applicant/signUpApplicant.html',context=context)

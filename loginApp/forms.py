@@ -13,10 +13,9 @@ class ApplicantRegistrationForm(UserCreationForm):
     class Meta:
         model=ApplicantProfile
         fields=[
-            "first_nm",
-            "last_nm",
             "email_id",
-            "applicant_passwd",
+            "username",
+            "password",
             "location",
             "gender"
         ]

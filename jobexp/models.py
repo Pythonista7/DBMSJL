@@ -22,14 +22,18 @@ class Recuiter(models.Model):
         #managed = False
         db_table = 'RECUITER'
         
-class ApplicantProfile(models.Model):
+class ApplicantProfile(AbstractBaseUser): #(models.Model):
     email_id = models.CharField(primary_key=True, max_length=50)
-    applicant_passwd = models.CharField(max_length=128,blank=False, null=False)
-    signup_date = models.DateField(db_column='signUp_date',default=date.today)  # Field name made lowercase. Autogent date
-    first_nm = models.CharField(max_length=30,blank=False, null=False)
-    last_nm = models.CharField(max_length=30,blank=False, null=False)
     location = models.CharField(max_length=30, blank=True)
     gender = models.CharField(max_length=30, blank=True)
+
+    username 				= models.CharField(max_length=30, unique=True)
+    date_joined				= models.DateTimeField(verbose_name='date joined', auto_now_add=True)
+    last_login				= models.DateTimeField(verbose_name='last login', auto_now=True)
+    is_admin				= models.BooleanField(default=False)
+    is_active				= models.BooleanField(default=True)
+    is_staff				= models.BooleanField(default=False)
+    is_superuser			= models.BooleanField(default=False)
 
     USERNAME_FIELD="email_id"
 
