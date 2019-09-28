@@ -26,18 +26,36 @@ class Recuiter(AbstractBaseUser):#models.Model):
     is_staff				= models.BooleanField(default=False)
     is_superuser			= models.BooleanField(default=False)
 
+    def __str__(self):              # __unicode__ on Python 2
+        return self.email
+
     USERNAME_FIELD="email"
 
     class Meta:
         #managed = False
         db_table = 'RECUITER'
         
-        
+class ApplicantManager():
+
+    def create_user(self,email_id,password=None):
+        if not email_id:
+            raise ValueError('User must have an email id .')
+        if not password:
+            raise ValidationError("Users must have password")
+            
+        user=self.model(
+            email=self.normalize_email(email_id),
+        )
+        user.set_password(password) #set or change password like this
+        user.save(using=self._db)
+        return user
+    
+
 
 class ApplicantProfile(AbstractBaseUser): #(models.Model):
-    email_id = models.CharField(primary_key=True, max_length=50)
+    email_id = models.EmailField(primary_key=True, max_length=50)
     location = models.CharField(max_length=30, blank=True)
-    gender = models.CharField(max_length=30, blank=True)
+    gender = models.CharField(max_length=30, blank=False)
 
     username 				= models.CharField(max_length=30, unique=True)
     date_joined				= models.DateTimeField(verbose_name='date joined', auto_now_add=True)
@@ -48,10 +66,13 @@ class ApplicantProfile(AbstractBaseUser): #(models.Model):
     is_superuser			= models.BooleanField(default=False)
 
     USERNAME_FIELD="email_id"
+    objects=ApplicantManager
 
     class Meta:
         #managed = False
         db_table = 'APPLICANT_PROFILE'
+
+
 
 
 class ApplicantSkills(models.Model):
