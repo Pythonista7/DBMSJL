@@ -14,7 +14,7 @@ def applicant_signup_view(request,*args,**kwargs):
     if form.is_valid():
         form.save()
         form=ApplicantRegistrationForm()
-        redirect('register_home_view')
+        #redirect('register_home_view')
     context={'form':form}
     return render(request,"applicant/signUpApplicant.html",context)
 

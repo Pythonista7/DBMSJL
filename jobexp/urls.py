@@ -22,6 +22,6 @@ urlpatterns = [
     path("",register_home_view),
     path("newapplicant/",applicant_signup_view),
     path("newrecuriter/",register_recruiter),
-    #path("newjob/",job_create_view),
+    path("newjob/",job_create_view),
     path("newcompany/",register_company)
 ]

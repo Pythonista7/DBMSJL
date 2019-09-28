@@ -94,13 +94,13 @@ class RegisterRecruiterForm(forms.ModelForm):
 
 
 class ApplicantRegistrationForm(UserCreationForm):
-    email=forms.EmailField()
+    email_id=forms.EmailField()
     location=forms.CharField()
     gender=forms.ChoiceField(choices=[("Male","Male"),("Female","Female")])
     class Meta:
         model=ApplicantProfile
         fields=[
-            "email",
+            "email_id",
             "username",
             "location",
             "gender"
