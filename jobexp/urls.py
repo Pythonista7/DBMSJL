@@ -15,7 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from jobexp.views import register_company,job_create_view,register_recruiter,register_home_view,applicant_signup_view
+from jobexp.views import (register_company,
+        job_create_view,
+        register_recruiter,
+        register_home_view,
+        applicant_signup_view,
+        )
 
 #app_name="products"
 urlpatterns = [

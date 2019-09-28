@@ -22,8 +22,8 @@ def job_create_view(request,*args,**kwargs):
     form=PostJobForm(request.POST or None)
     if form.is_valid():
         form.save()
-        #form=PostJobForm()
-        redirect('register_home_view')
+        form=PostJobForm()
+        #redirect('register_home_view')
     context={'form':form}
     return render(request,"forms/create_job.html",context)
 
