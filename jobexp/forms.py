@@ -77,18 +77,15 @@ class RegisterCompanyForm(forms.ModelForm):
 
 
 
-class RegisterRecruiterForm(forms.ModelForm):
+class RegisterRecruiterForm(UserCreationForm):
 
     email=forms.EmailField()
-    passwd=forms.PasswordInput()
 
-    
 
     class Meta:
         model=Recuiter
         fields=[
             "email",
-            "passwd",
             "company_name"
         ]
 

@@ -13,15 +13,27 @@ class Company(models.Model):
         db_table = 'COMPANY'
 
 
-class Recuiter(models.Model):
-    email = models.CharField(primary_key=True, max_length=50)
-    passwd = models.CharField(max_length=128)
+class Recuiter(AbstractBaseUser):#models.Model):
+    email = models.EmailField(primary_key=True, max_length=50)
+    #passwd = models.CharField(max_length=128)
     company_name = models.ForeignKey(Company, models.DO_NOTHING, db_column='company_name')
+ 
+    username 				= models.CharField(max_length=30, unique=False)
+    date_joined				= models.DateTimeField(verbose_name='date joined', auto_now_add=True)
+    last_login				= models.DateTimeField(verbose_name='last login', auto_now=True)
+    is_admin				= models.BooleanField(default=False)
+    is_active				= models.BooleanField(default=True)
+    is_staff				= models.BooleanField(default=False)
+    is_superuser			= models.BooleanField(default=False)
+
+    USERNAME_FIELD="email"
 
     class Meta:
         #managed = False
         db_table = 'RECUITER'
         
+        
+
 class ApplicantProfile(AbstractBaseUser): #(models.Model):
     email_id = models.CharField(primary_key=True, max_length=50)
     location = models.CharField(max_length=30, blank=True)
