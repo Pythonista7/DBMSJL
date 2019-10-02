@@ -37,8 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'Accounts',
     'jobexp',
-    'loginApp',
+    
     
 ]
 
@@ -79,7 +80,7 @@ WSGI_APPLICATION = 'NYCJobs.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',#'django.db.backends.sqlite3',
-        'NAME': 'JOB_PROJ' ,#os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': 'OPUSDB' ,#os.path.join(BASE_DIR, 'db.sqlite3'),
         'USER' :'Ash',
         'PASSWORD':"15p3310",
         'HOST':"",

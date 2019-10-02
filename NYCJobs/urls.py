@@ -22,7 +22,7 @@ urlpatterns = [
     path('',opus_home),
     path('work/',global_job_list),
 	path('register/',include('jobexp.urls')),
-    path('login/',include('loginApp.urls')),
+    path('accounts/',include('Accounts.urls')),
     path('admin/', admin.site.urls),
     #path('',include("try_django.urls"))
 ]

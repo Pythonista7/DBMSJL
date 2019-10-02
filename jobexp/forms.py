@@ -1,7 +1,8 @@
 from django import forms
-from .models import Jobs,Company,Recuiter,ApplicantProfile
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from .models import Jobs
+from Accounts.models import Company#,Recuiter,ApplicantProfile
+#from django.contrib.auth.models import User
+#from django.contrib.auth.forms import UserCreationForm
 
 class PostJobForm(forms.ModelForm):
     title       = forms.CharField(label='Job Title', 
@@ -75,30 +76,3 @@ class RegisterCompanyForm(forms.ModelForm):
         ]
 
 
-
-
-class RegisterRecruiterForm(UserCreationForm):
-
-    email=forms.EmailField()
-
-
-    class Meta:
-        model=Recuiter
-        fields=[
-            "email",
-            "company_name"
-        ]
-
-
-class ApplicantRegistrationForm(UserCreationForm):
-    email_id=forms.EmailField()
-    location=forms.CharField()
-    gender=forms.ChoiceField(choices=[("Male","Male"),("Female","Female")])
-    class Meta:
-        model=ApplicantProfile
-        fields=[
-            "email_id",
-            "username",
-            "location",
-            "gender"
-        ]
