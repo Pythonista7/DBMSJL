@@ -15,10 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from .views import register_applicant
+from .views import login_view
 
 #app_name="products"
 urlpatterns = [
-    path("signUpApplicant/",register_applicant),
+    path("",login_view),
    
 ]

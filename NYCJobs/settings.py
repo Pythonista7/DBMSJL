@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Accounts',
     'jobexp',
-    
+    'loginApp'
     
 ]
 
@@ -70,6 +70,8 @@ TEMPLATES = [
         },
     },
 ]
+
+#AUTH_USER_MODEL = 'Accounts.ApplicantProfile'
 
 WSGI_APPLICATION = 'NYCJobs.wsgi.application'
 

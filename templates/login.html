@@ -1,1 +1,17 @@
-<h1>Opus Login page</h1>
+{% extends "base.html"%}
+
+{%block content%}
+<div class="w3-panel">
+<h1><br>OPUS LOGIN </h1>
+</div>
+<div class="container">
+
+<form method="POST">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+    <button class='btn btn-outline-dark' type="submit" value="Save">LOGIN</button>
+    <br><br>
+</form> 
+</div>
+{% endblock %}

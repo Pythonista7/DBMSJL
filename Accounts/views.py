@@ -1,5 +1,6 @@
-from django.shortcuts import render
-from .forms import ApplicantRegistrationForm,RegisterRecruiterForm 
+from django.shortcuts import render,HttpResponse
+from django.contrib.auth import login,logout,authenticate
+from .forms import ApplicantRegistrationForm,RegisterRecruiterForm,LoginForm
 # Create your views here.
 
 def applicant_signup_view(request,*args,**kwargs):
@@ -18,3 +19,15 @@ def register_recruiter(request,*args,**kwargs):
         form=RegisterRecruiterForm()
     context={'form':form}
     return render(request,"forms/register_recruiter.html",context)
+
+def login_view(request,*args,**kwargs):
+    form=LoginForm(request.POST or None)
+    if form.is_valid():
+        user=form.save()
+        login(request,user)
+        return(HttpResponse("<h1>Logged in as "+"</h1"))
+    else:
+        print("INVALID LOGIN")
+        form=LoginForm()
+    context={'form':form}
+    return render(request,"login.html",context)

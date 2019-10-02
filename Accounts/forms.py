@@ -3,6 +3,17 @@ from .models import Recuiter,ApplicantProfile
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
+from django.contrib.auth.forms import AuthenticationForm
+
+class LoginForm(AuthenticationForm):
+    
+    class Meta:
+        model=ApplicantProfile
+        fields=[
+            "username",
+            "password",
+
+        ]
 
 class RegisterRecruiterForm(UserCreationForm):
 
@@ -29,3 +40,4 @@ class ApplicantRegistrationForm(UserCreationForm):
             "location",
             "gender"
         ]
+    

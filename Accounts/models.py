@@ -1,7 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser,BaseUserManager
+from django.contrib.auth.models import User
+
 
 # Create your models here.
+
+
 class Company(models.Model):
     company_name = models.CharField(primary_key=True, max_length=30)
     biz_stream = models.CharField(max_length=30, blank=True)
@@ -14,6 +18,49 @@ class Company(models.Model):
 
     def __str__(self):
         return self.company_name
+
+
+class RecuiterManager(BaseUserManager):
+
+    def create_user(self,email_id,password=None):
+        if not email_id:
+            raise ValueError('User must have an email id .')
+        if not password:
+            raise ValidationError("Users must have password")
+            
+        user=self.model(
+            email=self.normalize_email(email_id),
+        )
+        user.set_password(password) #set or change password like this
+        user.save(using=self._db)
+        return user
+
+    def create_staffuser(self, email,gender,location ,password):
+        
+        #Creates and saves a staff user with the given email and password.
+        
+        user = self.create_user(
+            email,
+            password=password,
+        )
+        user.staff = True
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, password):
+        
+        #Creates and saves a superuser with the given email and password.
+        
+        user = self.create_user(
+            email,
+            password=password,
+        )
+        user.staff = True
+        user.admin = True
+        user.save(using=self._db)
+        return user
+
+
 
 class Recuiter(AbstractBaseUser):#models.Model):
     email = models.EmailField(primary_key=True, max_length=50)
@@ -31,11 +78,12 @@ class Recuiter(AbstractBaseUser):#models.Model):
         return self.email
 
     USERNAME_FIELD="email"
-
+    objects=RecuiterManager()
     class Meta:
         #managed = False
         db_table = 'RECUITER'
-        
+
+
 class ApplicantManager(BaseUserManager):
 
     def create_user(self,email_id,password=None):
@@ -50,7 +98,31 @@ class ApplicantManager(BaseUserManager):
         user.set_password(password) #set or change password like this
         user.save(using=self._db)
         return user
-    
+
+    def create_staffuser(self, email,gender,location ,password):
+        
+        #Creates and saves a staff user with the given email and password.
+        
+        user = self.create_user(
+            email,
+            password=password,
+        )
+        user.staff = True
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, password):
+        
+        #Creates and saves a superuser with the given email and password.
+        
+        user = self.create_user(
+            email,
+            password=password,
+        )
+        user.staff = True
+        user.admin = True
+        user.save(using=self._db)
+        return user
 
 
 class ApplicantProfile(AbstractBaseUser): #(models.Model):
@@ -67,12 +139,12 @@ class ApplicantProfile(AbstractBaseUser): #(models.Model):
     is_superuser			= models.BooleanField(default=False)
 
     USERNAME_FIELD="email_id"
-    objects=ApplicantManager
+    objects=ApplicantManager()
 
     class Meta:
         #managed = False
         db_table = 'APPLICANT_PROFILE'
-
+        #REQUIRED_FIELDS = ['location','gender']
 
 
 class ApplicantSkills(models.Model):
