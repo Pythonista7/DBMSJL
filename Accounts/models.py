@@ -12,6 +12,8 @@ class Company(models.Model):
         #managed = False
         db_table = 'COMPANY'
 
+    def __str__(self):
+        return self.company_name
 
 class Recuiter(AbstractBaseUser):#models.Model):
     email = models.EmailField(primary_key=True, max_length=50)
@@ -34,7 +36,7 @@ class Recuiter(AbstractBaseUser):#models.Model):
         #managed = False
         db_table = 'RECUITER'
         
-class ApplicantManager():
+class ApplicantManager(BaseUserManager):
 
     def create_user(self,email_id,password=None):
         if not email_id:

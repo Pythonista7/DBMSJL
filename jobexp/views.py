@@ -2,6 +2,8 @@ from django.shortcuts import render,redirect
 from .forms import (PostJobForm,
         RegisterCompanyForm,
         )
+from .models import Jobs
+
 # Create your views here.
 
 def register_home_view(request,*args,**kwargs):
@@ -15,6 +17,10 @@ def job_create_view(request,*args,**kwargs):
         #redirect('register_home_view')
     context={'form':form}
     return render(request,"forms/create_job.html",context)
+
+def job_listing_view(request,*args,**kwargs):
+    joblist=Jobs.objects.all()
+    return render(request,"job_listing.html",{"joblist":joblist})
 
 def register_company(request,*args,**kwargs):
     form=RegisterCompanyForm(request.POST or None)

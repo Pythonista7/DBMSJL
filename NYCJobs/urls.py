@@ -15,14 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from .views import opus_home,global_job_list
+from .views import opus_home
 from django.http import HttpResponse
 
 urlpatterns = [
     path('',opus_home),
-    path('work/',global_job_list),
-	path('register/',include('jobexp.urls')),
+	path('jobs/',include('jobexp.urls')),
     path('accounts/',include('Accounts.urls')),
     path('admin/', admin.site.urls),
-    #path('',include("try_django.urls"))
 ]

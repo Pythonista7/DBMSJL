@@ -1,8 +1,6 @@
 from django import forms
 from .models import Jobs
-from Accounts.models import Company#,Recuiter,ApplicantProfile
-#from django.contrib.auth.models import User
-#from django.contrib.auth.forms import UserCreationForm
+from Accounts.models import Company
 
 class PostJobForm(forms.ModelForm):
     title       = forms.CharField(label='Job Title', 
