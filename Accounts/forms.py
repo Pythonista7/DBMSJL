@@ -1,4 +1,4 @@
-from django import forms
+""" from django import forms
 from .models import Recuiter,ApplicantProfile
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -8,21 +8,22 @@ from django.contrib.auth.forms import AuthenticationForm
 class LoginForm(AuthenticationForm):
     
     class Meta:
-        model=ApplicantProfile
+        model=Recuiter#ApplicantProfile
         fields=[
             "username",
             "password",
-
         ]
+
 
 class RegisterRecruiterForm(UserCreationForm):
 
     email=forms.EmailField()
-
+    
 
     class Meta:
         model=Recuiter
         fields=[
+            "username",
             "email",
             "company_name"
         ]
@@ -40,4 +41,4 @@ class ApplicantRegistrationForm(UserCreationForm):
             "location",
             "gender"
         ]
-    
+     """

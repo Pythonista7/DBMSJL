@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import ApplicantProfile,Recuiter#,ApplicantManager
+from .models import ApplicantProfile,Recuiter,Company
 # Register your models here.
 
 admin.site.register(ApplicantProfile)
 admin.site.register(Recuiter)
-#admin.site.register(ApplicantManager)
+admin.site.register(Company)
 

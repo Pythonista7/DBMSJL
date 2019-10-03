@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser,BaseUserManager
 from django.contrib.auth.models import User
 
 
@@ -20,53 +19,12 @@ class Company(models.Model):
         return self.company_name
 
 
-class RecuiterManager(BaseUserManager):
 
-    def create_user(self,email_id,password=None):
-        if not email_id:
-            raise ValueError('User must have an email id .')
-        if not password:
-            raise ValidationError("Users must have password")
-            
-        user=self.model(
-            email=self.normalize_email(email_id),
-        )
-        user.set_password(password) #set or change password like this
-        user.save(using=self._db)
-        return user
-
-    def create_staffuser(self, email,gender,location ,password):
-        
-        #Creates and saves a staff user with the given email and password.
-        
-        user = self.create_user(
-            email,
-            password=password,
-        )
-        user.staff = True
-        user.save(using=self._db)
-        return user
-
-    def create_superuser(self, email, password):
-        
-        #Creates and saves a superuser with the given email and password.
-        
-        user = self.create_user(
-            email,
-            password=password,
-        )
-        user.staff = True
-        user.admin = True
-        user.save(using=self._db)
-        return user
-
-
-
-class Recuiter(AbstractBaseUser):#models.Model):
+class Recuiter(models.Model):
     email = models.EmailField(primary_key=True, max_length=50)
     company_name = models.ForeignKey(Company, models.DO_NOTHING, db_column='company_name')
- 
-    username 				= models.CharField(max_length=30, unique=False)
+    username = models.CharField(max_length=30, unique=False)
+    
     date_joined				= models.DateTimeField(verbose_name='date joined', auto_now_add=True)
     last_login				= models.DateTimeField(verbose_name='last login', auto_now=True)
     is_admin				= models.BooleanField(default=False)
@@ -77,69 +35,24 @@ class Recuiter(AbstractBaseUser):#models.Model):
     def __str__(self):              # __unicode__ on Python 2
         return self.email
 
-    USERNAME_FIELD="email"
-    objects=RecuiterManager()
+    
     class Meta:
         #managed = False
         db_table = 'RECUITER'
 
 
-class ApplicantManager(BaseUserManager):
-
-    def create_user(self,email_id,password=None):
-        if not email_id:
-            raise ValueError('User must have an email id .')
-        if not password:
-            raise ValidationError("Users must have password")
-            
-        user=self.model(
-            email=self.normalize_email(email_id),
-        )
-        user.set_password(password) #set or change password like this
-        user.save(using=self._db)
-        return user
-
-    def create_staffuser(self, email,gender,location ,password):
-        
-        #Creates and saves a staff user with the given email and password.
-        
-        user = self.create_user(
-            email,
-            password=password,
-        )
-        user.staff = True
-        user.save(using=self._db)
-        return user
-
-    def create_superuser(self, email, password):
-        
-        #Creates and saves a superuser with the given email and password.
-        
-        user = self.create_user(
-            email,
-            password=password,
-        )
-        user.staff = True
-        user.admin = True
-        user.save(using=self._db)
-        return user
-
-
-class ApplicantProfile(AbstractBaseUser): #(models.Model):
-    email_id = models.EmailField(primary_key=True, max_length=50)
+class ApplicantProfile(models.Model):
+    email = models.EmailField(primary_key=True, max_length=100)
     location = models.CharField(max_length=30, blank=True)
     gender = models.CharField(max_length=30, blank=False)
-
     username 				= models.CharField(max_length=30, unique=True)
+    
     date_joined				= models.DateTimeField(verbose_name='date joined', auto_now_add=True)
     last_login				= models.DateTimeField(verbose_name='last login', auto_now=True)
     is_admin				= models.BooleanField(default=False)
     is_active				= models.BooleanField(default=True)
     is_staff				= models.BooleanField(default=False)
     is_superuser			= models.BooleanField(default=False)
-
-    USERNAME_FIELD="email_id"
-    objects=ApplicantManager()
 
     class Meta:
         #managed = False
