@@ -12,7 +12,7 @@ class Company(models.Model):
     description = models.CharField(max_length=1000, blank=True)
 
     class Meta:
-        #managed = False
+        #managed = False    
         db_table = 'COMPANY'
 
     def __str__(self):

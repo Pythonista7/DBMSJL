@@ -34,10 +34,21 @@ class PostJobForm(forms.ModelForm):
 			"posted_on",
 			"deadline",
 			"no_of_positions"]
+        exclude=['rec_email']
+        
+    """
+    def __init__(self, *args, **kwargs):
+        self._user = kwargs.pop('user')
+        super(PostJobForm, self).__init__(*args, **kwargs)
 
-
-
-
+    def save(self, commit=True):
+        inst = super(PostJobForm, self).save(commit=False)
+        inst.rec_email = self._user.email
+        if commit:
+            inst.save()
+            self.save_m2m()
+        return inst
+    """
 
 class RegisterCompanyForm(forms.ModelForm):
     company_name=forms.CharField(label='Company Name', 

@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser,BaseUserManager
+from django.contrib.auth.models import User
 from datetime import date
 from Accounts.models import Recuiter,Company
 
@@ -10,7 +10,7 @@ class Jobs(models.Model):
     company = models.ForeignKey(Company, models.DO_NOTHING, db_column='company')#,default="Google")
     title = models.CharField(max_length=30, blank=False)
     category = models.CharField(max_length=30, blank=True)
-    rec_email = models.ForeignKey(Recuiter, models.DO_NOTHING, db_column='rec_email')
+    rec_email = models.ForeignKey(User, models.DO_NOTHING, db_column='email')
     posting_loc = models.CharField(max_length=30,default="Bangalore")
     requriments = models.CharField(max_length=1000)
     job_type = models.CharField(max_length=30, blank=True)

@@ -60,10 +60,10 @@ def recruiter_register_login_view(request,*args,**kwargs):
             user=User.objects.get(email=email)
             rec_group.user_set.add(user)
             #save other data to Account.models
-            #rec=Recuiter()
-            #rec.email=form.cleaned_data.get('email')
-            #rec.username=form.cleaned_data.get('username')
-            #rec.company=form.cleaned_data.get('company')
+            rec=Recuiter()
+            rec.email=form.cleaned_data.get('email')
+            rec.username=form.cleaned_data.get('username')
+            rec.company=form.cleaned_data.get('company')
             return redirect('/')
             #return HttpResponse("<h1>SucessFully logged in as "+user.email+"</h1>")
     else:

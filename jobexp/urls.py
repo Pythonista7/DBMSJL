@@ -19,11 +19,13 @@ from .views import (
         register_company,
         job_create_view,
         register_home_view,
-        job_listing_view
+        job_listing_view,
+        general_login_view
         )
 
 urlpatterns = [
     path("joblist/",job_listing_view),
+    path("login/",general_login_view),
     path("register/",register_home_view),
     path("register/newjob/",job_create_view),
     path("register/newcompany/",register_company)
