@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.models import User
+from Accounts.models import Company
 from django.contrib.auth.forms import UserCreationForm#,AuthenticationForm
 from django.contrib.auth.models import User
 
@@ -20,7 +20,7 @@ class ApplicantRegistrationForm(UserCreationForm):
 
 class RecruiterRegistrationForm(UserCreationForm):
     email=forms.EmailField()
-    company=forms.ChoiceField(choices=(("Google","Google"),("FB","FB")))
+    company=forms.ModelChoiceField(Company.objects.all())
     class Meta:
         model=User
         fields=[
