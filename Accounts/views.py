@@ -1,4 +1,22 @@
 from django.shortcuts import render,HttpResponse
+
+
+
+def ApplicantProfileView(request,*args,**kwargs):
+    username=request.user.username
+    context={"username":username}
+    return render(request,'applicant/index.html',context=context)      #HttpResponse("<h1>APPLICANT PROFILE</h1>")
+
+
+
+def RecruiterProfileView(request,*args,**kwargs):
+    username=request.user.username
+    context={"username":username}
+    return render(request,'recruiter/index.html',context=context)       #HttpResponse("<h1>RECRUITER PROFILE</h1>")
+
+
+
+
 """ from django.contrib.auth import login,logout,authenticate
 from .forms import ApplicantRegistrationForm,RegisterRecruiterForm,LoginForm
 from django.contrib.auth.models import Group

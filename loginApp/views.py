@@ -16,10 +16,7 @@ def general_login_view(request,*args,**kwargs):
         if form.is_valid():
             user=form.get_user()
             login(request,user)
-            if user.group.name=="Applicant":
-                return redirect('applicant/index.html')
-            else:
-                return redirect('recruiter/index.html')
+            return redirect('/')
     else:
         form=AuthenticationForm()
         context={"form":form}#"login":"LOGIN"}# or form.get_user().username)}
@@ -48,7 +45,8 @@ def applicant_register_login_view(request,*args,**kwargs):
             applicant.username=form.cleaned_data.get('username')
             applicant.gender=form.cleaned_data.get('gender')
             applicant.location=form.cleaned_data.get('location')
-            return redirect('applicant/index.html')
+            general_login_view(request,*args,**kwargs)
+            return redirect('/login') #render(request,'login.html')
             #return HttpResponse("<h1>SucessFully logged in as "+user.email+"</h1>")
     else:
         
@@ -81,7 +79,7 @@ def recruiter_register_login_view(request,*args,**kwargs):
             rec.username=form.cleaned_data.get('username')
             rec.company=form.cleaned_data.get('company')
             rec.save()
-            return redirect('recruiter/index.html')
+            return redirect('login.html')
             #return HttpResponse("<h1>SucessFully logged in as "+user.email+"</h1>")
     else:
         
