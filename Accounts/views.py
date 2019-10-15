@@ -1,16 +1,24 @@
 from django.shortcuts import render,HttpResponse
+from django.contrib.auth import logout
+from django.shortcuts import render,redirect
 
+from .models import ApplicantProfile
+
+def logout_view(request):
+    logout(request)
+    return redirect('/')
 
 
 def ApplicantProfileView(request,*args,**kwargs):
-    username=request.user.username
-    context={"username":username}
+    user=request.user
+    user_profile=None#ApplicantProfile.objects.get(email=user.email)
+    context={"user":user,'user_profile':user_profile}
     return render(request,'applicant/index.html',context=context)      #HttpResponse("<h1>APPLICANT PROFILE</h1>")
 
 
 
 def RecruiterProfileView(request,*args,**kwargs):
-    username=request.user.username
+    username=request.user.email
     context={"username":username}
     return render(request,'recruiter/index.html',context=context)       #HttpResponse("<h1>RECRUITER PROFILE</h1>")
 

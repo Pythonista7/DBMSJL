@@ -5,10 +5,10 @@ from django.contrib.auth import logout
 
 def opus_home(request):
 
-    if request.user not in User.objects.all() and request.user.groups():
+    if request.user not in User.objects.all():
         #print("USer",request.user.username)
         print("Not a user pls signUp or Login")
-        return redirect('login')
+        return redirect('/login')
 
     elif(request.user.groups.all()[0].name == "Applicant"):
         return redirect("/accounts/Applicant/Profile")

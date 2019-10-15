@@ -17,6 +17,9 @@ def general_login_view(request,*args,**kwargs):
             user=form.get_user()
             login(request,user)
             return redirect('/')
+        else:
+            return HttpResponse("<h1>Error Ocuured try again </h1>")
+    
     else:
         form=AuthenticationForm()
         context={"form":form}#"login":"LOGIN"}# or form.get_user().username)}
