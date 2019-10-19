@@ -1,0 +1,26 @@
+{% extends "applicant/base.html" %}
+
+
+{% block content %}
+
+<br><br><br>
+<input class="w3-input w3-border-black w3-animate-input" placeholder="Search">
+<br><br>
+
+<table class="w3-table">
+    <tr>
+        <th>Job ID</th>
+        <th>Job Title</th>
+        <th>Category</th>
+        <th>Company</th> 
+        
+
+    </tr>
+{% for job in joblist %}
+    <tr>
+        <td>    {{ job.job_id }} </td> <td> {{ job.title }} </td> <td> {{ job.category }} </td> <td> {{ job.company.company_name }} </td>
+    </tr>
+{% endfor %}
+</table>
+
+{% endblock %}

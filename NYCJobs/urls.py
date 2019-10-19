@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from .views import opus_home
+from .views import opus_home,registerNewClients
 from django.http import HttpResponse
 
 urlpatterns = [
@@ -24,5 +24,7 @@ urlpatterns = [
     path('accounts/',include('Accounts.urls')),
     path('admin/', admin.site.urls),
     path('login/', include("loginApp.urls")),
+    path("signUpOption",registerNewClients)
+
 
 ]

@@ -9,7 +9,7 @@ from django.contrib.auth.forms import AuthenticationForm
 # Create your views here.
 
 def register_home_view(request,*args,**kwargs):
-	return render(request,"register.html")
+	return render(request,"recruiter/register.html")
 
 def job_create_view(request,*args,**kwargs):
     form=PostJobForm(request.POST or None)#user=request.user)
@@ -27,7 +27,7 @@ def job_create_view(request,*args,**kwargs):
 
 def job_listing_view(request,*args,**kwargs):
     joblist=Jobs.objects.all()
-    return render(request,"job_listing.html",{"joblist":joblist})
+    return render(request,"recruiter/job_listing.html",{"joblist":joblist})
 
 def register_company(request,*args,**kwargs):
     form=RegisterCompanyForm(request.POST or None)

@@ -20,7 +20,7 @@ from .views import (
         job_create_view,
         register_home_view,
         job_listing_view,
-        general_login_view
+        general_login_view,
         )
 
 urlpatterns = [
@@ -28,5 +28,5 @@ urlpatterns = [
     #path("login/",general_login_view),
     path("register/",register_home_view),
     path("register/newjob/",job_create_view),
-    path("register/newcompany/",register_company)
+    path("register/newcompany/",register_company),
 ]

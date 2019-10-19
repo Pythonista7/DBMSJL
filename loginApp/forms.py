@@ -20,7 +20,7 @@ class ApplicantRegistrationForm(UserCreationForm):
 
 class RecruiterRegistrationForm(UserCreationForm):
     email=forms.EmailField()
-    company=forms.ModelChoiceField(Company.objects.all())
+    company=forms.ModelChoiceField(Company.objects.all(),required=True)
     class Meta:
         model=User
         fields=[

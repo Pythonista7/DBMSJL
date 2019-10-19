@@ -1,0 +1,18 @@
+{% extends "base.html"%}
+
+{%block content%}
+<div class="w3-panel">
+<h1><br>SignUp for Opus </h1>
+</div>
+<div class="container">
+
+<form method="POST" action="">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+    
+    <button class='btn btn-outline-dark' type="submit" value="Save">SignUp</button>
+    <br><br>
+</form> 
+</div>
+{% endblock %}
