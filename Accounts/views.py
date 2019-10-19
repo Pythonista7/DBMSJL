@@ -11,7 +11,7 @@ def logout_view(request):
 
 def ApplicantProfileView(request,*args,**kwargs):
     user=request.user
-    user_profile=None#ApplicantProfile.objects.get(email=user.email)
+    user_profile=ApplicantProfile.objects.get(email=user.email) 
     context={"user":user,'user_profile':user_profile}
     return render(request,'applicant/index.html',context=context)      #HttpResponse("<h1>APPLICANT PROFILE</h1>")
 

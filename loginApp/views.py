@@ -52,7 +52,8 @@ def applicant_register_login_view(request,*args,**kwargs):
             applicant.username=form.cleaned_data.get('username')
             applicant.gender=form.cleaned_data.get('gender')
             applicant.location=form.cleaned_data.get('location')
-            general_login_view(request,*args,**kwargs)
+            applicant.save()
+            #general_login_view(request,*args,**kwargs)
             return redirect('/login') #render(request,'login.html')
             #return HttpResponse("<h1>SucessFully logged in as "+user.email+"</h1>")
     else:

@@ -25,9 +25,14 @@ def job_create_view(request,*args,**kwargs):
     context={'form':form}
     return render(request,"forms/create_job.html",context)
 
-def job_listing_view(request,*args,**kwargs):
+def recruiter_job_listing_view(request,*args,**kwargs):
     joblist=Jobs.objects.all()
     return render(request,"recruiter/job_listing.html",{"joblist":joblist})
+
+def applicant_job_listing_view(request,*args,**kwargs):
+    joblist=Jobs.objects.all()
+    return render(request,"applicant/job_listing.html",{"joblist":joblist})
+
 
 def register_company(request,*args,**kwargs):
     form=RegisterCompanyForm(request.POST or None)

@@ -8,8 +8,8 @@ def opus_home(request):
     if request.user not in User.objects.all():
         #print("USer",request.user.username)
         print("Not a user pls signUp or Login")
-        #return render(request,"index.html")
-        return redirect('/login')
+        return render(request,"index.html")
+        #return redirect('/login')
 
     elif len(request.user.groups.all())==0:
         return redirect('/login')#HttpResponse("<h1>Error Ocuured user not registered.SignUp and try again </h1>")
