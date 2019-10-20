@@ -1,0 +1,17 @@
+{% extends "applicant/base.html"%}
+
+{%block content%}
+<div class="w3-panel">
+<h1><br>EDIT </h1>
+</div>
+<div class="container">
+
+<form method="POST">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+    <button class='btn btn-outline-dark' type="submit" value="Save">SAVE</button>
+    <br><br>
+</form> 
+</div>
+{% endblock %}

@@ -1,3 +1,42 @@
+from django.forms import ModelForm
+from .models import ApplicantEdu
+from django import forms
+from django.contrib.admin.widgets import AdminDateWidget
+
+
+class EducationForm(ModelForm):
+    start_date= forms.DateField(widget=AdminDateWidget)
+    end_date=forms.DateField(widget=AdminDateWidget)
+    class Meta:
+        model=ApplicantEdu
+        requried=['university',"major","start_date","end_date","cgpa"]
+        exclude=['email']        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 """ from django import forms
 from .models import Recuiter,ApplicantProfile
 from django.contrib.auth.models import User

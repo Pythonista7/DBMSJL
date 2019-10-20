@@ -3,6 +3,7 @@ from django.contrib.auth import logout
 from django.shortcuts import render,redirect
 
 from .models import ApplicantProfile
+from .forms import EducationForm
 
 def logout_view(request):
     logout(request)
@@ -15,6 +16,18 @@ def ApplicantProfileView(request,*args,**kwargs):
     context={"user":user,'user_profile':user_profile}
     return render(request,'applicant/index.html',context=context)      #HttpResponse("<h1>APPLICANT PROFILE</h1>")
 
+
+def ApplicantProfileEditView(request,*args,**kwargs):
+    if request.method =='POST':
+        form=EducationForm(request.POST )
+        if form.is_valid():
+            form.email=request.user.email
+            form.save()
+            #print(form.cleaned_data)
+    else:
+        form=EducationForm()
+        context={"form":form}
+        return render(request,'applicant/editApplicant.html',context=context)
 
 
 def RecruiterProfileView(request,*args,**kwargs):

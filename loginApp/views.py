@@ -15,6 +15,7 @@ def general_login_view(request,*args,**kwargs):
         form=AuthenticationForm(data=request.POST)
         if form.is_valid():
             user=form.get_user() 
+
             if user in User.objects.all():
                 login(request,user)
             else:
@@ -46,6 +47,10 @@ def applicant_register_login_view(request,*args,**kwargs):
             applicant_group = Group.objects.get(name='Applicant') 
             user=User.objects.get(email=email)
             applicant_group.user_set.add(user)
+
+            #permissions = applicant_group.permissions.all()
+            #user.user_permissions=applicant_group.permissions#.add(permissions)
+
             #save other data to Account.models
             applicant=ApplicantProfile()
             applicant.email=form.cleaned_data.get('email')
@@ -54,6 +59,9 @@ def applicant_register_login_view(request,*args,**kwargs):
             applicant.location=form.cleaned_data.get('location')
             applicant.save()
             #general_login_view(request,*args,**kwargs)
+
+            
+
             return redirect('/login') #render(request,'login.html')
             #return HttpResponse("<h1>SucessFully logged in as "+user.email+"</h1>")
     else:
