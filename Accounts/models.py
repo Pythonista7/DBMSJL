@@ -61,7 +61,7 @@ class ApplicantProfile(models.Model):
 
 
 class ApplicantSkills(models.Model):
-    email = models.ForeignKey(ApplicantProfile, models.DO_NOTHING, primary_key=True)
+    email = models.OneToOneField(ApplicantProfile,on_delete=models.CASCADE)#ForeignKey(ApplicantProfile, models.DO_NOTHING, primary_key=True)
     skill = models.CharField(max_length=30)
 
     class Meta:
@@ -71,7 +71,8 @@ class ApplicantSkills(models.Model):
 
 
 class ApplicantEdu(models.Model):
-    email = models.ForeignKey(ApplicantProfile, models.DO_NOTHING, primary_key=True)
+    #email = models.ForeignKey(ApplicantProfile, models.DO_NOTHING, primary_key=True)
+    email = models.OneToOneField(ApplicantProfile,on_delete=models.CASCADE)
     university = models.CharField(max_length=50)
     major = models.CharField(max_length=50)
     start_date = models.DateField(blank=True, null=True)
@@ -84,7 +85,8 @@ class ApplicantEdu(models.Model):
 
 
 class ApplicantExp(models.Model):
-    email = models.ForeignKey(ApplicantProfile, models.DO_NOTHING, primary_key=True)
+    #email = models.ForeignKey(ApplicantProfile, models.DO_NOTHING, primary_key=True)
+    email = models.OneToOneField(ApplicantProfile,on_delete=models.CASCADE)
     total_exp = models.IntegerField()
     start_date = models.DateField()
     end_date = models.DateField()
