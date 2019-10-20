@@ -5,34 +5,83 @@
 <header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">
     <table>
       <tr>
-        <div class="w3-display-left w3-text-white" style="padding:48px">
-          <span class="w3-jumbo w3-hide-small">{{user.email}}</span><br>
+        <div class="w3-container w3-display-left w3-text-white" style="padding:48px">
+          <span class="w3-jumbo w3-hide-small">{{user.username}}</span><br>
           <span class="w3-xxlarge">Profile.</span><br>
           
-          <span class="w3-xlarge">{{user.username}}</span><br><br>
+          <span class="w3-xlarge">{{user.email}}</span><br><br>
           <span class="w3-xlarge">Location : {{user_profile.location}}</span><br>
           <span class="w3-xlarge">Gender : {{user_profile.gender}}</span><br>
         </div> 
-        
-        <div class="w3-display-bottomright w3-text-grey w3-xlarge" style="padding:24px 48px;">
-          <p><a href="/accounts/Applicant/Profile/edit/edu" class="fa fa-pencil w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off"></a></p>
-        </div>
-        
+
         <div class="w3-display-bottomleft w3-text-grey w3-large" style="padding:24px 48px">
-          <i class="fa fa-facebook-official w3-hover-opacity"></i>
-          <i class="fa fa-instagram w3-hover-opacity"></i>
-          <i class="fa fa-snapchat w3-hover-opacity"></i>
-          <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-          <i class="fa fa-twitter w3-hover-opacity"></i>
-          <i class="fa fa-linkedin w3-hover-opacity"></i>
-        </div>
+            <i class="fa fa-facebook-official w3-hover-opacity"></i>
+            <i class="fa fa-instagram w3-hover-opacity"></i>
+            <i class="fa fa-snapchat w3-hover-opacity"></i>
+            <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+            <i class="fa fa-twitter w3-hover-opacity"></i>
+            <i class="fa fa-linkedin w3-hover-opacity"></i>
+
       </tr>
+
+     
       
-
     </table>
-    </header>
     
-    
-    
+  </header>
 
-      {% endblock %}
+  
+  <div class="w3-container w3-light-grey" style="padding:128px 16px" id="contact">
+
+      <span class="w3-jumbo w3-hide-small">{{user.username}}</span><br>
+
+      <div class="w3-container" style="padding:48px">
+              <p>
+              <span class="w3-xxlarge">Education</span><br>
+
+              <span class="w3-large"> <b>University</b> :  {{user_edu.university}} ( {{user_edu.start_date}} - {{user_edu.end_date}} )</span><br>
+              <span class="w3-large"> <b>Major</b>      :  {{user_edu.major}}</span><br>
+              </p>
+              <div class="w3-text-grey w3-xlarge align-bottom"  style="padding:24px 48px;">
+                  <p><a href="/accounts/Applicant/Profile/edit/edu" class="fa fa-pencil w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">    Edit</a></p>
+              </div>
+    </div>
+
+
+    <div class="w3-container" style="padding:48px" >
+        <p>
+        <span class="w3-xxlarge">Experience</span><br>
+
+        <span class="w3-large">{{user_edu.university}} ( {{user_edu.start_date}} - {{user_edu.end_date}} )</span><br>
+        <span class="w3-large"> {{user_edu.major}}</span><br>
+        </p>
+        <div class="w3-text-grey w3-xlarge align-bottom"  style="padding:24px 48px;">
+            <p><a href="/accounts/Applicant/Profile/edit/exp" class="fa fa-pencil w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">    Edit</a></p>
+        </div>
+    </div>
+
+    
+    <div class="w3-container" style="padding:48px" >
+        <p>
+        <span class="w3-xxlarge">Skills</span><br>
+
+        <span class="w3-large">{{user_edu.university}} ( {{user_edu.start_date}} - {{user_edu.end_date}} )</span><br>
+        <span class="w3-large"> {{user_edu.major}} </span><br>
+        </p>
+        <div class="w3-text-grey w3-xlarge align-bottom"  style="padding:24px 48px;">
+            <p><a href="/accounts/Applicant/Profile/edit/skills" class="fa fa-pencil w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">    Edit</a></p>
+        </div>
+    </div>
+            
+   
+    
+               
+
+
+
+    <hr>
+
+
+  </div>
+
+  {% endblock %}

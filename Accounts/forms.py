@@ -1,12 +1,12 @@
 from django.forms import ModelForm
-from .models import ApplicantEdu
+from .models import ApplicantEdu,ApplicantExp
 from django import forms
-from django.contrib.admin.widgets import AdminDateWidget
+#from django.contrib.admin.widgets import AdminDateWidget
 
 
 class EducationForm(ModelForm):
-    start_date= forms.DateField(widget=AdminDateWidget)
-    end_date=forms.DateField(widget=AdminDateWidget)
+    start_date= forms.DateField()
+    end_date=forms.DateField()
     class Meta:
         model=ApplicantEdu
         requried=['university',"major","start_date","end_date","cgpa"]
@@ -15,11 +15,14 @@ class EducationForm(ModelForm):
 
 
 
-
-
-
-
-
+class ExperienceForm(ModelForm):
+    start_date= forms.DateField()
+    end_date=forms.DateField()
+    class Meta:
+        model=ApplicantExp
+        requried=['total_exp',"start_date","end_date","company"]
+        exclude=['email']        
+        
 
 
 
