@@ -4,3 +4,7 @@ check rec email for auto populate on job listing view
 1.Make sure all new signups are stored in Accounts model
 2.make profile views as they are redirected to when logged in instead of "/"
 3.Make different template for recruiter and applicant with the folders
+=======================================================
+
+Triggers
+-> show notification if profile segments are incomplete everytime the user logs in and when he tries to apply to a job without having a complete profile.

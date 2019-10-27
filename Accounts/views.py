@@ -1,20 +1,31 @@
 from django.shortcuts import render,HttpResponse
 from django.contrib.auth import logout
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 
-from .models import ApplicantProfile,ApplicantEdu
-from .forms import EducationForm
+from .models import ApplicantProfile,ApplicantEdu,ApplicantExp
+from .forms import EducationForm,ExperienceForm
 
 def logout_view(request):
     logout(request)
     return redirect('/')
 
-
 def ApplicantProfileView(request,*args,**kwargs):
     user=request.user
     user_profile=ApplicantProfile.objects.get(email=user.email) 
-    user_edu=ApplicantEdu.objects.get(email=user.email)
-    context={"user":user,'user_profile':user_profile,'user_edu':user_edu}
+    #############################################
+    try:
+        user_edu=ApplicantEdu.objects.get(email=user.email)
+    
+    except:
+        user_edu=ApplicantEdu.objects.none()
+    #############################################
+    try:
+        user_exp=ApplicantExp.objects.get(email=user.email)
+    
+    except:
+        user_exp=ApplicantExp.objects.none()
+
+    context={"user":user,'user_profile':user_profile,'user_edu':user_edu,'user_exp':user_exp}
     
 
     return render(request,'applicant/index.html',context=context)      #HttpResponse("<h1>APPLICANT PROFILE</h1>")
@@ -46,7 +57,7 @@ def ApplicantProfileEditEduView(request,*args,**kwargs):
 
 def ApplicantProfileEditExpView(request,*args,**kwargs):
     if request.method =='POST':
-        form=EducationForm(request.POST or None)
+        form=ExperienceForm(request.POST or None)
         ed=form.save(commit=False)
         #print(request.user.email)
         #ed.email=request.user.email
@@ -63,7 +74,7 @@ def ApplicantProfileEditExpView(request,*args,**kwargs):
             return HttpResponse('<h1>form was invalid</h1>')
 
     else:
-        form=EducationForm()
+        form=ExperienceForm()
         context={"form":form}
         return render(request,'applicant/editApplicant.html',context=context)
 

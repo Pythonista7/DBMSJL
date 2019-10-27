@@ -23,7 +23,7 @@ def job_create_view(request,*args,**kwargs):
         form=PostJobForm()
         #redirect('register_home_view')
     context={'form':form}
-    return render(request,"forms/create_job.html",context)
+    return render(request,"recruiter/create_job.html",context)
 
 def recruiter_job_listing_view(request,*args,**kwargs):
     joblist=Jobs.objects.all()
@@ -40,7 +40,7 @@ def register_company(request,*args,**kwargs):
         form.save()
         form=RegisterCompanyForm()
     context={'form':form}
-    return render(request,"forms/register_company.html",context)
+    return render(request,"recruiter/register_company.html",context)
 
 def general_login_view(request,*args,**kwargs):
     if request.method == 'POST':
