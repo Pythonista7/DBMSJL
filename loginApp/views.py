@@ -18,10 +18,11 @@ def general_login_view(request,*args,**kwargs):
 
             if user in User.objects.all():
                 login(request,user)
+                return redirect('/')
             else:
                 return HttpResponse("<h1>Error Ocuured user not registered.SignUp and try again </h1>")
             
-            return redirect('/')
+            
         else:
             return HttpResponse("<h1>Error Ocuured try again </h1>")
     
@@ -78,12 +79,13 @@ def applicant_register_login_view(request,*args,**kwargs):
 def recruiter_register_login_view(request,*args,**kwargs):
     form=RecruiterRegistrationForm(request.POST or None)
     if form.is_valid():
-        form.save()
+        ed=form.save(commit=False)
         email= form.cleaned_data.get('email')
         raw_password = form.cleaned_data.get('password1')
         raw_password2 = form.cleaned_data.get('password2')
         if raw_password==raw_password2:
             user = authenticate(username=email, password=raw_password)
+            ed.save()
             #log the user in
             #login(request, user)
             #Add the user to applicant group 
@@ -94,7 +96,7 @@ def recruiter_register_login_view(request,*args,**kwargs):
             rec=Recuiter()
             rec.email=form.cleaned_data.get('email')
             rec.username=form.cleaned_data.get('username')
-            rec.company=form.cleaned_data.get('company')
+            rec.company_name=form.cleaned_data.get('company')
             rec.save()
             return redirect('/')
             #return HttpResponse("<h1>SucessFully logged in as "+user.email+"</h1>")
@@ -102,7 +104,8 @@ def recruiter_register_login_view(request,*args,**kwargs):
         
         for msg in form.error_messages:
             print(form.error_messages[msg])
-             
+        #return HttpResponse("<h1>Form Invalid</h1>")
+
     form=RecruiterRegistrationForm()
     context={"form":form}
     return render(request,'recruiter/signUpRecuriter.html',context=context)

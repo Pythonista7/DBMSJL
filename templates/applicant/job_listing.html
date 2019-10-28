@@ -7,7 +7,7 @@
 <input class="w3-input w3-border-black w3-animate-input" placeholder="Search">
 <br><br>
 
-<table class="w3-table w3-ul ">
+<table class="w3-table  ">
     <tr class="w3-row w3-xlarge">
         <th>Job ID</th>
         <th>Job Title</th>
@@ -17,14 +17,14 @@
 
     </tr>
 {% for job in joblist %}
-    <tr class="w3-row w3-medium ">
+    <tr class="w3-row w3-large w3-hover-grey">
         <td>    {{ job.job_id }}               </td> 
         <td>    {{ job.title }}                 </td> 
         <td>    {{ job.category }}              </td> 
         <td>    {{ job.company.company_name }} </td>
         <td>
             <a href=/jobs/getjob/{{job.job_id}}>
-            <button class=" w3-input w3-black w3-text-white w3-hover-amber  w3-button w3-round-large">
+            <button class=" w3-input w3-black w3-text-white w3-hover-amber w3-medium w3-button w3-round-large">
             <b> Details </b>
             </button>
             </a>
