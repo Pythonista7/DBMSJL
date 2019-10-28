@@ -8,17 +8,21 @@
 <br><br>
 
 <table class="w3-table">
-    <tr>
+    <tr class="w3-row">
         <th>Job ID</th>
         <th>Job Title</th>
         <th>Category</th>
         <th>Company</th> 
-        
+        <th></th>
 
     </tr>
 {% for job in joblist %}
-    <tr>
-        <td>    {{ job.job_id }} </td> <td> {{ job.title }} </td> <td> {{ job.category }} </td> <td> {{ job.company.company_name }} </td>
+    <tr class="w3-row">
+        <td>    {{ job.job_id }}               </td> 
+        <td>    {{ job.title }}                 </td> 
+        <td>    {{ job.category }}              </td> 
+        <td>    {{ job.company.company_name }} </td>
+        <td><button class=" w3-input w3-black w3-text-white w3-hover-amber  w3-button w3-round-large"><b>Details</b></button></td>
     </tr>
 {% endfor %}
 </table>
