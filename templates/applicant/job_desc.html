@@ -1,0 +1,39 @@
+{% extends "applicant/base.html" %}
+
+
+{% block content %}
+<br><br><br>
+<div class="w3-container">
+<div class="w3-xxlarge">{{job.company}}</div>
+<div class="w3-xlarge">{{job.title}} ( {{job.job_type}} )</div>
+<div class="w3-small">Posted on : {{job.posted_on}}</div>
+<div class="w3-panel " >
+
+    <p class="w3-row w3-large">
+            <b>Category</b> : {{job.category}}
+            </p>
+
+
+    <p class="w3-row w3-large">
+            <b>Requriments</b> :<br> {{job.requriments}}
+        </p>   
+
+
+        <p class="w3-row w3-large">
+                <b>Number of Openings </b>: {{job.no_of_positions}}
+            </p>
+
+        <p class="w3-row w3-large">
+                <b>Location </b>: {{job.posting_loc}}
+            </p>
+    
+        <div class="w3-row">
+            
+            <p class="w3-row w3-large"><b>Deadline</b>  :  {{job.deadline}}
+        </div>
+
+        <div class=" w3-row w3-large  "><b>Recruiter</b> :  {{job.rec_email}}</div>
+        
+</div>
+</div>
+{% endblock %}

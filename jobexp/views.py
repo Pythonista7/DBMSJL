@@ -53,3 +53,9 @@ def general_login_view(request,*args,**kwargs):
         form=AuthenticationForm()
         context={"form":form}#"login":"LOGIN"}# or form.get_user().username)}
         return render(request,"login.html",context)
+
+
+def get_job_details(request,id):
+    job=Jobs.objects.get(job_id=id)
+    context={'job':job}
+    return render(request,'applicant/job_desc.html',context)
