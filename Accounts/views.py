@@ -42,7 +42,10 @@ def ApplicantProfileCreateEduView(request,*args,**kwargs):
     try:
         email=ApplicantProfile.objects.get(email=request.user.email) 
         if ApplicantEdu.objects.get(email=email):
-                return redirect('/')
+                form=EducationForm(request.POST or None,instance=ApplicantEdu.objects.get(email=email))
+                if form.is_valid():
+                    form.save()
+                    return redirect('/')
     except:
         pass
 
@@ -71,7 +74,13 @@ def ApplicantProfileCreateExpView(request,*args,**kwargs):
     try:
         email=ApplicantProfile.objects.get(email=request.user.email) 
         if ApplicantExp.objects.get(email=email):
-                return redirect('/')
+                #return redirect('/')
+                #If the entry already exists then we need to update it 
+                form=ExperienceForm(request.POST or None,instance=ApplicantExp.objects.get(email=email))
+                if form.is_valid():
+                    form.save()
+                    return redirect('/')
+
     except:
         pass
 
