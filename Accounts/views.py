@@ -39,15 +39,22 @@ def ApplicantProfileView(request,*args,**kwargs):
 
 
 def ApplicantProfileCreateEduView(request,*args,**kwargs):
+    try:
+        email=ApplicantProfile.objects.get(email=request.user.email) 
+        if ApplicantEdu.objects.get(email=email):
+                return redirect('/')
+    except:
+        pass
+
+    print('\n\n\nNO USER EDU, CREATE ONE \n\n\n\n')
+
     if request.method =='POST':
         form=EducationForm(request.POST or None)
-        ed=form.save(commit=False)
-        ed.email=ApplicantProfile.objects.get(email=request.user.email) 
-
-
-        ed.save()
+        
         if form.is_valid():
-            
+            ed=form.save(commit=False)
+            ed.email=ApplicantProfile.objects.get(email=request.user.email) 
+            ed.save()
             form.save()
         
             return redirect('/')
@@ -61,23 +68,23 @@ def ApplicantProfileCreateEduView(request,*args,**kwargs):
 
 
 def ApplicantProfileCreateExpView(request,*args,**kwargs):
+    try:
+        email=ApplicantProfile.objects.get(email=request.user.email) 
+        if ApplicantExp.objects.get(email=email):
+                return redirect('/')
+    except:
+        pass
+
+    print('\n\n\nNO USER EXP, CREATE ONE \n\n\n\n')
+
     if request.method =='POST':
         form=ExperienceForm(request.POST or None)
         
-        ed=form.save(commit=False)
-        #print(request.user.email)
-        #email=request.user.email#ed.email=request.user.email
-        ed.email=ApplicantProfile.objects.get(email=request.user.email)
-        #ApplicantExp.objects.filter(pk=email).update(total_exp=form.total_exp)
-        #ApplicantExp.objects.filter(pk=email).update(start_date=form.start_date)
-        #ApplicantExp.objects.filter(pk=email).update(end_date=form.end_date)
-        #ApplicantExp.objects.filter(pk=email).update(company=form.company)
-        #print("\n\n FORM SAVED \n\n",form.cleaned_data,"\n\n")
-        form.save()
         if form.is_valid():
-            
+            ed=form.save(commit=False)
+            ed.email=ApplicantProfile.objects.get(email=request.user.email) 
+            ed.save()
             form.save()
-            print("\n\n FORM SAVED \n\n",form.cleaned_data,"\n\n")
         
             return redirect('/')
         else:
@@ -88,20 +95,24 @@ def ApplicantProfileCreateExpView(request,*args,**kwargs):
         context={"form":form}
         return render(request,'applicant/editApplicant.html',context=context)
 
-
 def ApplicantProfileCreateSkillView(request,*args,**kwargs):
+    try:
+        email=ApplicantProfile.objects.get(email=request.user.email) 
+        if ApplicantSkills.objects.get(email=email):
+                return redirect('/')
+    except:
+        pass
+
+    print('\n\n\nNO USER SKILLS, CREATE SOME \n\n\n\n')
+
     if request.method =='POST':
         form=SkillsForm(request.POST or None)
-        ed=form.save(commit=False)
-        #print(request.user.email)
-        #ed.email=request.user.email
-        ed.email=ApplicantProfile.objects.get(email=request.user.email) 
-        #print("\n\n FORM SAVED \n\n",form.cleaned_data,"\n\n")
-        ed.save()
+        
         if form.is_valid():
-            
+            ed=form.save(commit=False)
+            ed.email=ApplicantProfile.objects.get(email=request.user.email) 
+            ed.save()
             form.save()
-            print("\n\n FORM SAVED \n\n",form.cleaned_data,"\n\n")
         
             return redirect('/')
         else:
@@ -111,8 +122,6 @@ def ApplicantProfileCreateSkillView(request,*args,**kwargs):
         form=SkillsForm()
         context={"form":form}
         return render(request,'applicant/editApplicant.html',context=context)
-
-
 
 
 
