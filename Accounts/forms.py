@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import ApplicantEdu,ApplicantExp
+from .models import ApplicantEdu,ApplicantExp,ApplicantSkills
 from django import forms
 #from django.contrib.admin.widgets import AdminDateWidget
 
@@ -24,6 +24,21 @@ class ExperienceForm(ModelForm):
         exclude=['email']        
         
 
+class SkillsForm(ModelForm):
+    skill=forms.CharField(widget=forms.Textarea(
+                                attrs={
+                                    "placeholder": "List all your skills here. ",
+                                    "class": "new-class-name two",
+                                    "id": "my-id-for-textarea",
+                                    "ronumberws": 10,
+                                    'cols': 150
+                                }
+                            ))
+    class Meta:
+        model=ApplicantSkills
+        requried=["skill"]
+        exclude=['email']        
+        
 
 
 
