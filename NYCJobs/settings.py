@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'NYCJobs.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',#'django.db.backends.sqlite3',
-        'NAME': 'NEW_OPUSDB' ,#os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': 'TESTDB' ,#os.path.join(BASE_DIR, 'db.sqlite3'),
         'USER' :'Ash',
         'PASSWORD':"15p3310",
         'HOST':"",
