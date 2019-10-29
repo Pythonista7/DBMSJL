@@ -24,6 +24,7 @@ from .views import (
         general_login_view,
         get_job_details,
         delete_job,
+        company_profile_view,
         )
 
 urlpatterns = [
@@ -35,4 +36,5 @@ urlpatterns = [
     path("register/newcompany/",register_company),
     path("getjob/<int:id>/",get_job_details),
     path("delete/<int:job_id>/",delete_job),
+    path("company/<str:company_name>/",company_profile_view)
 ]

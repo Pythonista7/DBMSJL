@@ -1,11 +1,12 @@
 from django.shortcuts import render,redirect,HttpResponse
 from django.contrib.auth import login
+from django.contrib import messages
 from django.contrib.auth.models import User,Group
 from .forms import (PostJobForm,
         RegisterCompanyForm,
         )
 from .models import Jobs
-from Accounts.models import Recuiter
+from Accounts.models import Recuiter,Company
 
 from django.contrib.auth.forms import AuthenticationForm
 # Create your views here.
@@ -69,7 +70,7 @@ def get_job_details(request,id):
         return render(request,'applicant/job_desc.html',context)
     
     else:
-        print(f"\n\n\n {request.user.username} \t\t {job.rec_email}  \n\n\n")
+        #print(f"\n\n\n {request.user.username} \t\t {job.rec_email}  \n\n\n")
         if str(job.rec_email) == str(request.user.username):
             context={'job':job,"this_rec_job":True}
             return render(request,'recruiter/job_desc.html',context)
@@ -84,3 +85,10 @@ def is_Applicant(user):
 def delete_job(request,job_id):
     Jobs.objects.filter(job_id=job_id).delete()
     return redirect('/jobs/joblist/recruiter')
+
+def company_profile_view(request,company_name):
+    
+    c=Company.objects.get(company_name=company_name)
+    context={"company":c}
+    #print("\n\n\nIT WAS HERE\n\n")
+    return render(request,'company.html',context=context)

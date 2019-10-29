@@ -4,7 +4,11 @@
 {% block content %}
 <br><br><br>
 <div class="w3-container">
-<div class="w3-xxlarge">{{job.company}}</div>
+<div class="w3-xxlarge">
+    <a href=/jobs/company/{{job.company}}/ >
+        {{job.company}}
+    </a>
+</div>
 <div class="w3-xlarge">{{job.title}} ( {{job.job_type}} )</div>
 <div class="w3-small">Posted on : {{job.posted_on}}</div>
 <div class="w3-panel " >
@@ -42,5 +46,6 @@
         <br><br>
         </div>
         {% endif %}
+
 
 {% endblock %}

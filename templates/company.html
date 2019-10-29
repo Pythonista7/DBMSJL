@@ -1,0 +1,22 @@
+{% extends "recruiter/base.html" %}
+
+
+{% block content %}
+
+
+<br><br><br>
+<div class="w3-container">
+
+<div class="w3-xxlarge">{{company.company_name}}</div>
+
+<div class="w3-xlarge"> {{ company.biz_stream }} </div>
+
+<p class="w3-row w3-large">
+        <b>Description</b> : {{company.description}}
+        </p>
+
+<p class="w3-row w3-large">
+        <b>Visit us at : </b> : <a href={{company.website}}>{{company.website}}</a>
+        </p>
+
+{% endblock %}
