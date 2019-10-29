@@ -1,10 +1,12 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,HttpResponse
 from django.contrib.auth import login
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User,Group
 from .forms import (PostJobForm,
         RegisterCompanyForm,
         )
 from .models import Jobs
+from Accounts.models import Recuiter
+
 from django.contrib.auth.forms import AuthenticationForm
 # Create your views here.
 
@@ -14,11 +16,13 @@ def register_home_view(request,*args,**kwargs):
 def job_create_view(request,*args,**kwargs):
     form=PostJobForm(request.POST or None)#user=request.user)
     if form.is_valid():
-        rec_model=form.save(commit=False)
+        ##NOTE THIS IS JOB MODEL
+        job_model=form.save(commit=False)
         user=User.objects.get(email=request.user.email)
         #if User.objects.get(email=request.user.email).group.filter(name="Recruiter"):
-        rec_model.rec_email=user
-        rec_model.save()
+        job_model.rec_email=user
+        job_model.company=Recuiter.objects.get(email=user.email).company_name
+        job_model.save()
 
         form=PostJobForm()
         #redirect('register_home_view')
@@ -57,5 +61,26 @@ def general_login_view(request,*args,**kwargs):
 
 def get_job_details(request,id):
     job=Jobs.objects.get(job_id=id)
-    context={'job':job}
-    return render(request,'applicant/job_desc.html',context)
+    this_rec_job=False
+
+    context={'job':job,this_rec_job:False}
+    
+    if is_Applicant(request.user):
+        return render(request,'applicant/job_desc.html',context)
+    
+    else:
+        print(f"\n\n\n {request.user.username} \t\t {job.rec_email}  \n\n\n")
+        if str(job.rec_email) == str(request.user.username):
+            context={'job':job,"this_rec_job":True}
+            return render(request,'recruiter/job_desc.html',context)
+        else:
+            #return HttpResponse("You shouldnt be seeing this page, if you are please report to dev.")
+            return render(request,'recruiter/job_desc.html',context)
+
+def is_Applicant(user):
+    return user.groups.filter(name='Applicant').exists()
+
+#Try to use a trigger instead of this function 
+def delete_job(request,job_id):
+    Jobs.objects.filter(job_id=job_id).delete()
+    return redirect('/jobs/joblist/recruiter')

@@ -24,7 +24,7 @@ class PostJobForm(forms.ModelForm):
     class Meta:
         model=Jobs
         fields=[		
-            "company",
+            
 			"title",
 			"category",
 			"rec_email",
@@ -34,7 +34,7 @@ class PostJobForm(forms.ModelForm):
 			"posted_on",
 			"deadline",
 			"no_of_positions"]
-        exclude=['rec_email']
+        exclude=["company",'rec_email']
         
     """
     def __init__(self, *args, **kwargs):

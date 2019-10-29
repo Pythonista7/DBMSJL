@@ -23,6 +23,7 @@ from .views import (
         applicant_job_listing_view,
         general_login_view,
         get_job_details,
+        delete_job,
         )
 
 urlpatterns = [
@@ -33,4 +34,5 @@ urlpatterns = [
     path("register/newjob/",job_create_view),
     path("register/newcompany/",register_company),
     path("getjob/<int:id>/",get_job_details),
+    path("delete/<int:job_id>/",delete_job),
 ]
