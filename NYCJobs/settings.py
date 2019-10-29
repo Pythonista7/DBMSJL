@@ -82,13 +82,13 @@ WSGI_APPLICATION = 'NYCJobs.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',#'django.db.backends.sqlite3',
-        'NAME': 'NEW_OPUSDB' ,#os.path.join(BASE_DIR, 'db.sqlite3'),
-        'USER' :'Ash',
-        'PASSWORD':"15p3310",
-        'HOST':"",
-        'PORT':'3306',
-        'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"}
+        'ENGINE':'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        #'USER' :'Ash',
+        #'PASSWORD':"15p3310",
+        #'HOST':"",
+        #'PORT':'3306',
+        #'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"}
     }
 }
 
