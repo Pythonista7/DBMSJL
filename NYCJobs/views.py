@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import logout
 
 def opus_home(request):
-    print('OPUS HOME')
+    #print('OPUS HOME')
     if request.user not in User.objects.all():
         #print("USer",request.user.username)
         print("Not a user pls signUp or Login")
@@ -12,7 +12,7 @@ def opus_home(request):
         #return redirect('/login')
 
     elif len(request.user.groups.all())==0:
-        return redirect('/login')#HttpResponse("<h1>Error Ocuured user not registered.SignUp and try again </h1>")
+        return HttpResponse("<h1>Error Ocuured user not registered.SignUp and try again </h1>") #redirect('/login')#
 
     elif(request.user.groups.all()[0].name == "Applicant"):
         return redirect("/accounts/Applicant/Profile")

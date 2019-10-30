@@ -25,7 +25,7 @@ SECRET_KEY = '0)*!&#bbb)4ci-ur8!j#x#)vr8d(0r5-%%jqs5sl7bt=l6jsfy'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS =[]# ['binaryblueapp.herokuapp.com']
+ALLOWED_HOSTS =[]#['binaryblueapp.herokuapp.com']
 
 
 # Application definition
