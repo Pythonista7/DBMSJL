@@ -7,7 +7,7 @@ def opus_home(request):
     #print('OPUS HOME')
     if request.user not in User.objects.all():
         #print("USer",request.user.username)
-        print("Not a user pls signUp or Login")
+        #print("Not a user pls signUp or Login")
         return render(request,"index.html")
         #return redirect('/login')
 
