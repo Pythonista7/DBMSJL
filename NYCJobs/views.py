@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import logout
 
 def opus_home(request):
-
+    print('OPUS HOME')
     if request.user not in User.objects.all():
         #print("USer",request.user.username)
         print("Not a user pls signUp or Login")
