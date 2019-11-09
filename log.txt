@@ -8,3 +8,6 @@ check rec email for auto populate on job listing view
 
 Triggers
 -> show notification if profile segments are incomplete everytime the user logs in and when he tries to apply to a job without having a complete profile.
+
+-> create a UI box showing no of applicant,no of recruiters and no of jobs ,where each board gets incremeted 
+by using triggers.

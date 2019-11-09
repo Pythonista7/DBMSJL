@@ -45,7 +45,7 @@ class ApplicantProfile(models.Model):
     email = models.EmailField(primary_key=True, max_length=100)
     location = models.CharField(max_length=30, blank=True)
     gender = models.CharField(max_length=30, blank=False)
-    username 				= models.CharField(max_length=30, unique=True)
+    username = models.CharField(max_length=30, unique=True)
     
     date_joined				= models.DateTimeField(verbose_name='date joined', auto_now_add=True)
     last_login				= models.DateTimeField(verbose_name='last login', auto_now=True)
@@ -96,3 +96,20 @@ class ApplicantExp(models.Model):
         #managed = False
         db_table = 'APPLICANT_EXP'
         unique_together = (('email', 'start_date', 'end_date'),)
+
+class ApplicantAppliedJobs(models.Model):
+    email=models.ForeignKey(ApplicantProfile,on_delete=models.CASCADE)
+    job_id=models.IntegerField()
+    applied_date=models.DateField()
+
+    class Meta:
+        db_table = 'APPLICANT_APPLIED'
+        unique_together = (('email', 'job_id'),)
+
+class SiteStats(models.Model):
+    no_of_applicants=models.IntegerField(default=0)
+    no_of_recruiters=models.IntegerField(default=0)
+    no_of_jobs=models.IntegerField(default=0)
+
+    class Meta:
+        db_table='SITE_STATS'

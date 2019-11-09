@@ -34,7 +34,7 @@ class PostJobForm(forms.ModelForm):
 			"posted_on",
 			"deadline",
 			"no_of_positions"]
-        exclude=["company",'rec_email']
+        exclude=["company",'rec_email','no_of_applicants']
         
     """
     def __init__(self, *args, **kwargs):

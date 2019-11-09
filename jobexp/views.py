@@ -6,8 +6,9 @@ from .forms import (PostJobForm,
         RegisterCompanyForm,
         )
 from .models import Jobs
-from Accounts.models import Recuiter,Company
-
+from Accounts.models import ApplicantAppliedJobs
+from Accounts.models import Recuiter,Company,ApplicantProfile
+import datetime
 from django.contrib.auth.forms import AuthenticationForm
 # Create your views here.
 
@@ -20,6 +21,7 @@ def job_create_view(request,*args,**kwargs):
         ##NOTE THIS IS JOB MODEL
         job_model=form.save(commit=False)
         user=User.objects.get(email=request.user.email)
+        #User.objects.raw(''' SELECT * FROM USER WHERE email = $ ''',request.user.email)
         #if User.objects.get(email=request.user.email).group.filter(name="Recruiter"):
         job_model.rec_email=user
         job_model.company=Recuiter.objects.get(email=user.email).company_name
@@ -64,15 +66,21 @@ def get_job_details(request,id):
     job=Jobs.objects.get(job_id=id)
     this_rec_job=False
 
-    context={'job':job,this_rec_job:False}
+    context={'job':job,"this_rec_job":False,"job_id":id}
     
     if is_Applicant(request.user):
-        return render(request,'applicant/job_desc.html',context)
-    
+        qs=ApplicantAppliedJobs.objects.filter(email=request.user.email,job_id=id)
+        if qs.exists():
+            context={'job':job,"this_rec_job":False,"job_id":id,"Applied":True}
+            return render(request,'applicant/job_desc.html',context)
+        else:
+            context={'job':job,"this_rec_job":False,"job_id":id,"Applied":False}
+            return render(request,'applicant/job_desc.html',context)
+
     else:
         #print(f"\n\n\n {request.user.username} \t\t {job.rec_email}  \n\n\n")
         if str(job.rec_email) == str(request.user.username):
-            context={'job':job,"this_rec_job":True}
+            context={'job':job,"this_rec_job":True,"job_id":id}
             return render(request,'recruiter/job_desc.html',context)
         else:
             #return HttpResponse("You shouldnt be seeing this page, if you are please report to dev.")
@@ -92,3 +100,22 @@ def company_profile_view(request,company_name):
     context={"company":c}
     #print("\n\n\nIT WAS HERE\n\n")
     return render(request,'company.html',context=context)
+
+def apply_view(request,job_id):
+
+    #increment job count
+    print(job_id)
+    job=Jobs.objects.get(job_id=job_id)
+    print(job.no_of_applicants)
+    job.no_of_applicants=job.no_of_applicants+1
+    print(job.no_of_applicants)
+    job.save()
+
+    #save list of job_ids to which a applicant has applied
+    reg=ApplicantAppliedJobs()
+    reg.email=ApplicantProfile.objects.get(email=request.user.email)
+    reg.job_id=job_id
+    reg.applied_date=datetime.datetime.now()
+    reg.save()
+
+    return redirect('/')

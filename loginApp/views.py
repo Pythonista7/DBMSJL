@@ -98,7 +98,7 @@ def recruiter_register_login_view(request,*args,**kwargs):
             rec.username=form.cleaned_data.get('username')
             rec.company_name=form.cleaned_data.get('company')
             rec.save()
-            return redirect('/')
+            return redirect('/login')
             #return HttpResponse("<h1>SucessFully logged in as "+user.email+"</h1>")
     else:
         

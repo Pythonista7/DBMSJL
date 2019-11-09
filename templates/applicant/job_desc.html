@@ -4,7 +4,11 @@
 {% block content %}
 <br><br><br>
 <div class="w3-container">
-<div class="w3-xxlarge">{{job.company}}</div>
+<div class="w3-xxlarge">
+    <a href=/jobs/company/{{job.company}}/ >
+        {{job.company}}
+    </a>
+</div>
 <div class="w3-xlarge">{{job.title}} ( {{job.job_type}} )</div>
 <div class="w3-small">Posted on : {{job.posted_on}}</div>
 <div class="w3-panel " >
@@ -33,11 +37,27 @@
         </div>
 
         <div class=" w3-row w3-large  "><b>Recruiter</b> :  {{job.rec_email}}</div>
-        
-</div>
+        <h2>JOB ID : {{job_id}}</h2>
+    </div>
 
-<button class="w3-button w3-round-large w3-black w3-hover-amber">APPLY</button>
+    {% if not Applied%}
+    <div class="w3-container">
+    <a href=/jobs/applySuccessful/{{job_id}}/>
+    <button class="w3-button w3-round-large w3-black w3-hover-amber">APPLY</button>
+    </a>
+    </div>
+    {% endif %}
 
-</div>
+    {% if Applied%}
+    <div class="w3-container">
+    
+    <button class="w3-button w3-round-large w3-grey ">APPLIED</button>
+    
+    </div>
+    {% endif %}
+
+    </div>
+    </div>
+    </div>
 
 {% endblock %}

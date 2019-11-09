@@ -17,7 +17,6 @@ class Jobs(models.Model):
     posted_on = models.DateField(default=date.today)
     deadline = models.DateField(blank=True,null=True)
     no_of_positions = models.IntegerField(default=1)
-
+    no_of_applicants=models.IntegerField(default=0)
     class Meta:
-        #managed = False
         db_table = 'JOBS'
