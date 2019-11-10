@@ -10,6 +10,8 @@ from Accounts.models import ApplicantAppliedJobs
 from Accounts.models import Recuiter,Company,ApplicantProfile
 import datetime
 from django.contrib.auth.forms import AuthenticationForm
+from django.db import connection
+
 # Create your views here.
 
 def register_home_view(request,*args,**kwargs):
@@ -24,6 +26,8 @@ def job_create_view(request,*args,**kwargs):
         #User.objects.raw(''' SELECT * FROM USER WHERE email = $ ''',request.user.email)
         #if User.objects.get(email=request.user.email).group.filter(name="Recruiter"):
         job_model.rec_email=user
+        #with connection.cursor() as cursor:
+        #    job_model.company=cursor.execute("SELECT company_name from RECUITER WHERE email = %s",[user.email])
         job_model.company=Recuiter.objects.get(email=user.email).company_name
         job_model.save()
 
@@ -91,7 +95,9 @@ def is_Applicant(user):
 
 #Try to use a trigger instead of this function 
 def delete_job(request,job_id):
-    Jobs.objects.filter(job_id=job_id).delete()
+    #Jobs.objects.filter(job_id=job_id).delete()
+    with connection.cursor() as cursor:
+        cursor.execute("DELETE FROM JOBS WHERE job_id = %s",[job_id])
     return redirect('/jobs/joblist/recruiter')
 
 def company_profile_view(request,company_name):
@@ -101,7 +107,6 @@ def company_profile_view(request,company_name):
     #print("\n\n\nIT WAS HERE\n\n")
     return render(request,'company.html',context=context)
 
-from django.db import connection
 
 def apply_view(request,job_id):
 
