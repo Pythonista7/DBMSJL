@@ -33,11 +33,11 @@ def job_create_view(request,*args,**kwargs):
     return render(request,"recruiter/create_job.html",context)
 
 def recruiter_job_listing_view(request,*args,**kwargs):
-    joblist=Jobs.objects.all()
+    joblist=Jobs.objects.raw("SELECT * FROM JOBS")  #Jobs.objects.all()
     return render(request,"recruiter/job_listing.html",{"joblist":joblist})
 
 def applicant_job_listing_view(request,*args,**kwargs):
-    joblist=Jobs.objects.all()
+    joblist=Jobs.objects.raw("SELECT * FROM JOBS") #Jobs.objects.all()
     return render(request,"applicant/job_listing.html",{"joblist":joblist})
 
 
@@ -101,18 +101,27 @@ def company_profile_view(request,company_name):
     #print("\n\n\nIT WAS HERE\n\n")
     return render(request,'company.html',context=context)
 
+from django.db import connection
+
 def apply_view(request,job_id):
 
     #increment job count
     print(job_id)
-    job=Jobs.objects.get(job_id=job_id)
-    print(job.no_of_applicants)
-    job.no_of_applicants=job.no_of_applicants+1
-    print(job.no_of_applicants)
-    job.save()
+    #job=Jobs.objects.raw("UPDATE JOBS SET no_of_applicants=no_of_applicants+1 FROM JOBS WHERE job_id = %s",[job_id])#
+    with connection.cursor() as cursor:
+        cursor.execute("UPDATE JOBS SET no_of_applicants=no_of_applicants+1 WHERE job_id= %s",[job_id])
+    
+    #job=Jobs.objects.get(job_id=job_id)
+    #print(job.no_of_applicants)
+    #job.no_of_applicants=job.no_of_applicants+1
+    #print(job.no_of_applicants)
+    #job.save()
 
     #save list of job_ids to which a applicant has applied
     reg=ApplicantAppliedJobs()
+    #umail=request.user.email
+    #reg.email=cursor.execute("SELECT email FROM APPLICANT_PROFILE WHERE email = %s",[umail])
+    #ApplicantProfile.objects.raw("SELECT * FROM APPLICANT_PROFILE WHERE email = %s ",[umail])  #ApplicantProfile.objects.get(email=request.user.email)
     reg.email=ApplicantProfile.objects.get(email=request.user.email)
     reg.job_id=job_id
     reg.applied_date=datetime.datetime.now()
