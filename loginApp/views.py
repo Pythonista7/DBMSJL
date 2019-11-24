@@ -7,6 +7,7 @@ from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.models import Group,User
 from .forms import ApplicantRegistrationForm
+from django import db
 # Create your views here.
 
 

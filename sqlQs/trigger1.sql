@@ -1,4 +1,4 @@
-#use TESTDB;
+use TESTDB;
 DROP TRIGGER IF EXISTS inc_app_count;
 DROP TRIGGER IF EXISTS inc_rec_count;
 DROP TRIGGER IF EXISTS inc_job_count;
@@ -17,4 +17,5 @@ CREATE TRIGGER TESTDB.inc_job_count
 AFTER INSERT ON JOBS
 FOR EACH ROW
 UPDATE SITE_STATS SET no_of_jobs=no_of_jobs + 1 WHERE  id = 1 ;
+
 

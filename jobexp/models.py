@@ -1,8 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import date
-from Accounts.models import Recuiter,Company
-
+from Accounts.models import Recuiter,Company,ApplicantProfile
 
 
 class Jobs(models.Model):
@@ -20,3 +19,13 @@ class Jobs(models.Model):
     no_of_applicants=models.IntegerField(default=0)
     class Meta:
         db_table = 'JOBS'
+
+
+class ApplicantAppliedJobs(models.Model):
+    email=models.ForeignKey(ApplicantProfile,on_delete=models.CASCADE,primary_key=True)
+    job_id=models.ForeignKey(Jobs,on_delete=None)#models.IntegerField()
+    applied_date=models.DateField()
+
+    class Meta:
+        db_table = 'APPLICANT_APPLIED'
+        unique_together = (('email', 'job_id'),)

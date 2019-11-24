@@ -2,13 +2,14 @@ from django.shortcuts import render,redirect,HttpResponse
 from jobexp.models import Jobs
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
+from Accounts.models import SiteStats
 
 def opus_home(request):
-
     if request.user not in User.objects.all():
         #print("USer",request.user.username)
         print("Not a user pls signUp or Login")
-        return render(request,"index.html")
+        context={"stats":SiteStats.objects.get(pk=1)}
+        return render(request,"index.html",context=context)
         #return redirect('/login')
 
     elif len(request.user.groups.all())==0:

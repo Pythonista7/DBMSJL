@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+#from jobexp.models import Jobs
 
 # Create your models here.
 
@@ -61,7 +61,7 @@ class ApplicantProfile(models.Model):
 
 
 class ApplicantSkills(models.Model):
-    email = models.OneToOneField(ApplicantProfile,on_delete=models.CASCADE)#ForeignKey(ApplicantProfile, models.DO_NOTHING, primary_key=True)
+    email = models.OneToOneField(ApplicantProfile,on_delete=models.CASCADE,primary_key=True)#ForeignKey(ApplicantProfile, models.DO_NOTHING, primary_key=True)
     skill = models.CharField(max_length=30)
 
     class Meta:
@@ -72,7 +72,7 @@ class ApplicantSkills(models.Model):
 
 class ApplicantEdu(models.Model):
     #email = models.ForeignKey(ApplicantProfile, models.DO_NOTHING, primary_key=True)
-    email = models.OneToOneField(ApplicantProfile,on_delete=models.CASCADE)
+    email = models.OneToOneField(ApplicantProfile,on_delete=models.CASCADE,primary_key=True)
     university = models.CharField(max_length=50)
     major = models.CharField(max_length=50)
     start_date = models.DateField(blank=True, null=True)
@@ -86,7 +86,7 @@ class ApplicantEdu(models.Model):
 
 class ApplicantExp(models.Model):
     #email = models.ForeignKey(ApplicantProfile, models.DO_NOTHING, primary_key=True)
-    email = models.OneToOneField(ApplicantProfile,on_delete=models.CASCADE)
+    email = models.OneToOneField(ApplicantProfile,on_delete=models.CASCADE,primary_key=True)
     total_exp = models.IntegerField()
     start_date = models.DateField()
     end_date = models.DateField()
@@ -96,15 +96,6 @@ class ApplicantExp(models.Model):
         #managed = False
         db_table = 'APPLICANT_EXP'
         unique_together = (('email', 'start_date', 'end_date'),)
-
-class ApplicantAppliedJobs(models.Model):
-    email=models.ForeignKey(ApplicantProfile,on_delete=models.CASCADE)
-    job_id=models.IntegerField()
-    applied_date=models.DateField()
-
-    class Meta:
-        db_table = 'APPLICANT_APPLIED'
-        unique_together = (('email', 'job_id'),)
 
 class SiteStats(models.Model):
     no_of_applicants=models.IntegerField(default=0)

@@ -6,7 +6,7 @@ from .forms import (PostJobForm,
         RegisterCompanyForm,
         )
 from .models import Jobs
-from Accounts.models import ApplicantAppliedJobs
+from jobexp.models import ApplicantAppliedJobs
 from Accounts.models import Recuiter,Company,ApplicantProfile
 import datetime
 from django.contrib.auth.forms import AuthenticationForm
@@ -93,11 +93,16 @@ def get_job_details(request,id):
 def is_Applicant(user):
     return user.groups.filter(name='Applicant').exists()
 
-#Try to use a trigger instead of this function 
+#Try to use a stored drocedure instead of this function 
 def delete_job(request,job_id):
     #Jobs.objects.filter(job_id=job_id).delete()
     with connection.cursor() as cursor:
         cursor.execute("DELETE FROM JOBS WHERE job_id = %s",[job_id])
+    return redirect('/jobs/joblist/recruiter')
+
+def delete_job_proc(request,job_id):
+    with connection.cursor() as cursor:
+        cursor.execute(f"CALL delete_job_proc({int(job_id)})")
     return redirect('/jobs/joblist/recruiter')
 
 def company_profile_view(request,company_name):
@@ -128,7 +133,7 @@ def apply_view(request,job_id):
     #reg.email=cursor.execute("SELECT email FROM APPLICANT_PROFILE WHERE email = %s",[umail])
     #ApplicantProfile.objects.raw("SELECT * FROM APPLICANT_PROFILE WHERE email = %s ",[umail])  #ApplicantProfile.objects.get(email=request.user.email)
     reg.email=ApplicantProfile.objects.get(email=request.user.email)
-    reg.job_id=job_id
+    reg.job_id=Jobs.objects.filter(job_id=job_id)[0]
     reg.applied_date=datetime.datetime.now()
     reg.save()
 
