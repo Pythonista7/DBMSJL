@@ -136,7 +136,13 @@ def ApplicantProfileCreateSkillView(request,*args,**kwargs):
 
 def RecruiterProfileView(request,*args,**kwargs):
     username=request.user.email
+    #try:
     context={"username":username,"user":Recuiter.objects.get(email=username)}
-    return render(request,'recruiter/index.html',context=context)       #HttpResponse("<h1>RECRUITER PROFILE</h1>")
+    if username in Recuiter.objects.username.all():
+        return render(request,'recruiter/index.html',context=context)       
+    else:
+        return redirect("/accounts/logout/")
+    #except:
+    #    return redirect("/accounts/logout/")
 
 

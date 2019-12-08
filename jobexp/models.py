@@ -6,10 +6,10 @@ from Accounts.models import Recuiter,Company,ApplicantProfile
 
 class Jobs(models.Model):
     job_id = models.AutoField(primary_key=True)
-    company = models.ForeignKey(Company, models.DO_NOTHING, db_column='company')#,default="Google")
+    company = models.ForeignKey(Company, models.CASCADE, db_column='company')#,default="Google")
     title = models.CharField(max_length=30, blank=False)
     category = models.CharField(max_length=30, blank=True)
-    rec_email = models.ForeignKey(User, models.DO_NOTHING, db_column='email')
+    rec_email = models.ForeignKey(User, models.CASCADE, db_column='email')
     posting_loc = models.CharField(max_length=30,default="Bangalore")
     requriments = models.CharField(max_length=1000)
     job_type = models.CharField(max_length=30, blank=True)
@@ -22,7 +22,7 @@ class Jobs(models.Model):
 
 
 class ApplicantAppliedJobs(models.Model):
-    email=models.ForeignKey(ApplicantProfile,on_delete=models.CASCADE,primary_key=True)
+    email=models.OneToOneField(ApplicantProfile,on_delete=models.CASCADE,primary_key=True)
     job_id=models.ForeignKey(Jobs,on_delete=None)#models.IntegerField()
     applied_date=models.DateField()
 

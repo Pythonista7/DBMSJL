@@ -6,12 +6,13 @@
 </div>
 <div class="container">
 
-<form method="POST">
+<form method="POST" class="w3-cell">
     {% csrf_token %}
 
     {{ form.as_p }}
-    <button class='btn btn-outline-info' type="submit" value="Save">SAVE</button>
-    <br><br>
+    <button class='btn btn-outline-dark w3-button w3-hover-amber w3-gray w3-border-black' type="submit" value="Save">
+            <b>SAVE</b>
+        </button>    <br><br>
 </form> 
 </div>
 {% endblock %}

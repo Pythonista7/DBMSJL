@@ -51,8 +51,9 @@ def register_company(request,*args,**kwargs):
         form.save()
         form=RegisterCompanyForm()
     context={'form':form}
-    return render(request,"recruiter/register_company.html",context)
-
+    #return render(request,"recruiter/register_company.html",context)
+    return redirect('/')
+    
 def general_login_view(request,*args,**kwargs):
     if request.method == 'POST':
         form=AuthenticationForm(data=request.POST)
